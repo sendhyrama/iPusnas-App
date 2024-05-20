@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ipusnas_app/components/color.dart';
 import 'package:ipusnas_app/home_screen.dart';
 
+import 'splash_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
