@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipusnas_app/components/color.dart';
+import 'package:ipusnas_app/ereader_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -376,7 +377,12 @@ class BookCard extends StatelessWidget {
             Text(author),
             Text('Terakhir dibaca halaman $lastReadPage'),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EReaderScreen()),
+                );
+                },
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(primaryColor),
