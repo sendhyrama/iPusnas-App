@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipusnas_app/components/color.dart';
+import 'package:ipusnas_app/detail_book_screen.dart';
 import 'package:ipusnas_app/ereader_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -380,7 +381,7 @@ class BookCard extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EReaderScreen()),
+                  MaterialPageRoute(builder: (context) => DetailBookScreen()),
                 );
                 },
                 style: ButtonStyle(
