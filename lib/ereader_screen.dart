@@ -8,7 +8,7 @@ class EReaderScreen extends StatefulWidget {
 }
 
 class _EReaderScreenState extends State<EReaderScreen> {
-  int currentPage = 1;
+  int currentPage = 100;
   int totalPages = 346;
 
   @override
