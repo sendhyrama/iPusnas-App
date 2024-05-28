@@ -140,8 +140,8 @@ class HomeContent extends StatelessWidget {
                 SizedBox(height: 10),
                 BookCard(
                   title:
-                      'Filosofi Teras: Filsafat Yunani-Romawi Kuno untuk Mental Tangguh Masa Kini',
-                  author: 'Henry Manampiring',
+                      'Things Left Behind : Hal-hal yang Kita Pelajari dari Mereka yang Telah Tiada',
+                  author: 'Kim Sae Byoul & Jeon Ae Won',
                   lastReadPage: 100,
                 ),
               ],
@@ -232,6 +232,12 @@ class HomeContent extends StatelessWidget {
                 4.5,
                 'assets/books/cantik-itu-luka.png', // Placeholder for book cover image
               ),
+              Book(
+                'Polaris Musim Dingin',
+                'Alicia Lidwina',
+                4.5,
+                'assets/books/polaris-musim-dingin.png', // Placeholder for book cover image
+              ),
             ],
           ),
         ],
@@ -293,7 +299,8 @@ class BookList extends StatelessWidget {
               if (books[index].title == 'Filosofi Teras') {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DetailBookScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const DetailBookScreen()),
                 );
               }
             },
@@ -316,7 +323,8 @@ class BookList extends StatelessWidget {
                   const SizedBox(height: 5),
                   Text(
                     books[index].title,
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                   Text(books[index].author),
                   Row(
@@ -385,14 +393,17 @@ class BookCard extends StatelessWidget {
   final int lastReadPage;
 
   const BookCard(
-      {super.key, required this.title, required this.author, required this.lastReadPage});
+      {super.key,
+      required this.title,
+      required this.author,
+      required this.lastReadPage});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
       child: ListTile(
-        leading: Image.asset('assets/books/filosofi-teras-cover.png',
+        leading: Image.asset('assets/books/things-left-behind.png',
             width: 50), // Placeholder for book cover image
         title: Text(title),
         subtitle: Column(
