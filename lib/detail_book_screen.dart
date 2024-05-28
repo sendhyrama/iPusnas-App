@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ipusnas_app/components/color.dart';
-import 'package:ipusnas_app/ereader_screen.dart';
+import 'package:ipusnas_app/ereader_screen_2.dart';
 
 class SectionTitle extends StatelessWidget {
   final String title;
@@ -498,7 +498,7 @@ class DetailBookScreen extends StatelessWidget {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EReaderScreen()),
+                  MaterialPageRoute(builder: (context) => EReaderScreen2()),
                 );
               },
               child: const Text('Ya'),

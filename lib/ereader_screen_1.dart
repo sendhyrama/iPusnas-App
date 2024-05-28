@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ipusnas_app/components/color.dart';
 
-class EReaderScreen extends StatefulWidget {
-  EReaderScreen({Key? key}) : super(key: key);
+class EReaderScreen1 extends StatefulWidget {
+  EReaderScreen1({Key? key}) : super(key: key);
   @override
-  _EReaderScreenState createState() => _EReaderScreenState();
+  _EReaderScreen1State createState() => _EReaderScreen1State();
 }
 
-class _EReaderScreenState extends State<EReaderScreen> {
+class _EReaderScreen1State extends State<EReaderScreen1> {
   int currentPage = 100;
   int totalPages = 346;
 
@@ -95,7 +95,7 @@ class _EReaderScreenState extends State<EReaderScreen> {
           children: [
             Expanded(
               child: Center(
-                child: Image.asset('assets/books/filosofi-teras-cover.png'),
+                child: Image.asset('assets/books/things-left-behind.png'),
               ),
             ),
             const SizedBox(height: 8),
