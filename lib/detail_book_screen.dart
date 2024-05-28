@@ -102,8 +102,15 @@ class BookList extends StatelessWidget {
   }
 }
 
-class DetailBookScreen extends StatelessWidget {
+class DetailBookScreen extends StatefulWidget {
   const DetailBookScreen({super.key});
+
+  @override
+  _DetailBookScreenState createState() => _DetailBookScreenState();
+}
+
+class _DetailBookScreenState extends State<DetailBookScreen> {
+  bool isBorrowed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -465,10 +472,17 @@ class DetailBookScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          _showConfirmationDialog(context);
+          if (!isBorrowed) {
+            _showConfirmationDialog(context);
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EReaderScreen2()),
+            );
+          }
         },
-        label: const Text('Pinjam Buku'),
-        backgroundColor: primaryColor,
+        label: Text(isBorrowed ? 'Baca Sekarang' : 'Pinjam Buku'),
+        backgroundColor: isBorrowed ? Colors.green : primaryColor,
         foregroundColor: Colors.white,
         extendedPadding: const EdgeInsets.all(140),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
@@ -496,12 +510,32 @@ class DetailBookScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => EReaderScreen2()),
-                );
+                _showSuccessDialog(context);
+                setState(() {
+                  isBorrowed = true;
+                });
               },
               child: const Text('Ya'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Pinjaman Berhasil'),
+          content: const Text('Pinjaman buku berhasil.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Tutup'),
             ),
           ],
         );
