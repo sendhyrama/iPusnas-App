@@ -73,11 +73,13 @@ class _EReaderScreen2State extends State<EReaderScreen2> {
                   children: [
                     const Text('Daftar isi',
                         style: TextStyle(
+                            fontFamily: 'Nunito',
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 16)),
                     Text('$currentPage/$totalPages',
                         style: const TextStyle(
+                            fontFamily: 'Nunito',
                             color: Colors.black,
                             fontWeight: FontWeight.normal,
                             fontSize: 16)),

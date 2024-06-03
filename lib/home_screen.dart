@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ipusnas_app/components/color.dart';
 import 'package:ipusnas_app/detail_book_screen.dart';
 import 'package:ipusnas_app/ereader_screen_1.dart';
-import 'package:ipusnas_app/ereader_screen_2.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,32 +33,87 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        type: BottomNavigationBarType.fixed,
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                _selectedIndex == 0 ? primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
+              child: const Icon(
+                Icons.home,
+              ),
+            ),
             label: 'Beranda',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.book),
+            icon: ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                _selectedIndex == 1 ? primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
+              child: Image.asset(
+                'assets/icons/pustaka.png',
+                width: 24,
+                height: 24,
+              ),
+            ),
             label: 'ePustaka',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star_border),
+            icon: ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                _selectedIndex == 2 ? primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
+              child: Image.asset(
+                'assets/icons/feed.png',
+                width: 24,
+                height: 24,
+              ),
+            ),
             label: 'Feed',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.library_books),
+            icon: ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                _selectedIndex == 3 ? primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
+              child: Image.asset(
+                'assets/icons/book-rack.png',
+                width: 24,
+                height: 24,
+              ),
+            ),
             label: 'Rak Buku',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                _selectedIndex == 4 ? primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
+              child: Image.asset(
+                'assets/icons/profile.png',
+                width: 24,
+                height: 24,
+              ),
+            ),
             label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: primaryColor,
         unselectedItemColor: Colors.grey,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         onTap: _onItemTapped,
+        selectedLabelStyle:
+            const TextStyle(fontFamily: 'Nunito', fontWeight: FontWeight.bold),
+        unselectedLabelStyle:
+            const TextStyle(fontFamily: 'Nunito', fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -82,12 +136,30 @@ class HomeContent extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Cari',
-                          prefixIcon: const Icon(Icons.search),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
+                      child: Container(
+                        height: 40, // Set your desired height here
+                        decoration: BoxDecoration(
+                          color:
+                              Colors.grey[300], // Set the background color here
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Cari',
+                            hintStyle: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey[
+                                    600]), // Adjust hint text color if needed
+                            prefixIcon:
+                                const Icon(Icons.search, color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                              borderSide:
+                                  BorderSide.none, // Removes the default border
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical:
+                                    15.0), // Adjust vertical padding to center the text
                           ),
                         ),
                       ),
@@ -118,9 +190,17 @@ class HomeContent extends StatelessWidget {
                         Text(
                           'Hai, Jane Doe!',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontFamily: 'Nunito',
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
                         ),
-                        Text('Selamat membaca buku'),
+                        Text(
+                          'Selamat membaca buku',
+                          style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal),
+                        ),
                       ],
                     ),
                     Spacer(),
@@ -136,8 +216,10 @@ class HomeContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Lanjutkan Bacaan',
-                    style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    style: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold)),
                 SizedBox(height: 10),
                 BookCard(
                   title:
@@ -151,38 +233,51 @@ class HomeContent extends StatelessWidget {
           const SectionTitle(title: 'Yang baru di iPusnas'),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text('Jelajahi bacaan baru setiap harinya!'),
+            child: Text('Jelajahi bacaan baru setiap harinya!',
+                style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600)),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 16),
           BookList(
             books: [
               Book(
                 'Filosofi Teras',
                 'Henry M.',
-                4.5,
+                5.0,
                 'assets/books/filosofi-teras-cover.png', // Placeholder for book cover image
               ),
               Book(
                 'Salvation of a Saint',
                 'Keigo Higashino',
-                4.5,
+                5.0,
                 'assets/books/salvation-of-a-saint.png', // Placeholder for book cover image
               ),
               Book(
                 'Bumi',
                 'Tere Liye',
-                4.5,
+                5.0,
                 'assets/books/bumi.png', // Placeholder for book cover image
               ),
               Book(
                 'Funiculi Funicula',
                 'Toshikazu K.',
-                4.5,
+                5.0,
                 'assets/books/funiculi-funicula.png', // Placeholder for book cover image
               ),
             ],
           ),
           const SectionTitle(title: 'Baca buku dari penulis ini'),
+          const Padding(
+            padding: EdgeInsets.only(left: 16.0),
+            child: Text('Penulis buku ini sangat terkenal lho!',
+                style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600)),
+          ),
+          const SizedBox(height: 16),
           AuthorList(
             authors: [
               Author(
@@ -213,34 +308,44 @@ class HomeContent extends StatelessWidget {
             ],
           ),
           const SectionTitle(title: 'Rekomendasi Bacaan'),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text('Mungkin buku ini sesuai dengan minatmu!',
+                style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600)),
+          ),
+          const SizedBox(height: 16),
           BookList(
             books: [
               Book(
                 'Keajaiban Toko Kelontong Namiya',
                 'Keigo Higashino',
-                4.5,
+                5.0,
                 'assets/books/keajaiban-toko-kelontong-namiya.png', // Placeholder for book cover image
               ),
               Book(
                 'Dalang Pelukis Mimpi',
                 'Lee Miye',
-                4.5,
+                5.0,
                 'assets/books/dalang-pelukis-mimpi.png', // Placeholder for book cover image
               ),
               Book(
                 'Cantik Itu Luka',
                 'Eka Kurniawan',
-                4.5,
+                5.0,
                 'assets/books/cantik-itu-luka.png', // Placeholder for book cover image
               ),
               Book(
                 'Polaris Musim Dingin',
                 'Alicia Lidwina',
-                4.5,
+                5.0,
                 'assets/books/polaris-musim-dingin.png', // Placeholder for book cover image
               ),
             ],
           ),
+          const SizedBox(height: 10)
         ],
       ),
     );
@@ -249,23 +354,29 @@ class HomeContent extends StatelessWidget {
 
 class SectionTitle extends StatelessWidget {
   final String title;
-
   const SectionTitle({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(left: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 18,
+                fontWeight: FontWeight.bold),
           ),
           TextButton(
             onPressed: () {},
-            child: const Text('Lihat Semua'),
+            child: const Text('Lihat Semua',
+                style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -290,7 +401,7 @@ class BookList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250,
+      height: 270,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: books.length,
@@ -306,7 +417,7 @@ class BookList extends StatelessWidget {
               }
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.only(left: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -322,22 +433,57 @@ class BookList extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5),
-                  Text(
-                    books[index].title,
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold),
+                  Container(
+                    width: 120, // Same width as the book image
+                    child: Text(
+                      books[index].title,
+                      style: const TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  Text(books[index].author),
-                  Row(
-                    children: List.generate(5, (i) {
-                      return Icon(
-                        i < books[index].rating
-                            ? Icons.star
-                            : Icons.star_border,
-                        color: Colors.yellow,
-                        size: 16,
-                      );
-                    }),
+                  Container(
+                    width: 120, // Same width as the book image
+                    child: Text(
+                      books[index].author,
+                      style: const TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Flexible(
+                    child: Row(
+                      children: [
+                        Row(
+                          children: List.generate(5, (i) {
+                            return Icon(
+                              i < books[index].rating
+                                  ? Icons.star
+                                  : Icons.star_border,
+                              color: Colors.yellow,
+                              size: 16,
+                            );
+                          }),
+                        ),
+                        const SizedBox(
+                            width:
+                                5), // Add some spacing between the stars and the rating text
+                        Text(
+                          '${books[index].rating.toStringAsFixed(1)}',
+                          style: const TextStyle(
+                            fontFamily: 'Nunito',
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -369,8 +515,10 @@ class AuthorList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: authors.length,
         itemBuilder: (context, index) {
+          final nameParts = authors[index].name.split(' ');
+          final formattedName = nameParts.join('\n');
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.only(left: 16.0),
             child: Column(
               children: [
                 CircleAvatar(
@@ -378,7 +526,15 @@ class AuthorList extends StatelessWidget {
                   backgroundImage: AssetImage(authors[index].image),
                 ),
                 const SizedBox(height: 8),
-                Text(authors[index].name),
+                Text(
+                  formattedName,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           );
@@ -401,35 +557,98 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Determine the original width and height of the book image asset
+    const double originalImageWidth = 100.0;
+    const double originalImageHeight = 148.0;
+    const double imageMargin = 12.0; // Set your custom margin value
+
     return Card(
-      elevation: 2,
-      child: ListTile(
-        leading: Image.asset('assets/books/things-left-behind.png',
-            width: 50), // Placeholder for book cover image
-        title: Text(title),
-        subtitle: Column(
+      elevation: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(author),
-            Text('Terakhir dibaca halaman $lastReadPage'),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => EReaderScreen1()),
-                );
-              },
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all<Color>(primaryColor),
-                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  right: imageMargin), // Apply margin only to the right side
+              child: ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(8.0), // Set the desired border radius
+                child: Image.asset(
+                  'assets/books/things-left-behind.png',
+                  width: originalImageWidth,
+                  height: originalImageHeight,
+                  fit: BoxFit.cover,
                 ),
               ),
-              child: const Text(
-                'Lanjutkan',
-                style: TextStyle(color: Colors.white),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: imageMargin), // Apply margin only to the left side
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      author,
+                      style: const TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    Text(
+                      'Terakhir dibaca halaman $lastReadPage',
+                      style: const TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: 116,
+                      height: 28,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EReaderScreen1()),
+                          );
+                        },
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(primaryColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          'Lanjutkan',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Nunito',
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ipusnas_app/components/color.dart';
-import 'package:ipusnas_app/home_screen.dart';
 
 import 'splash_screen.dart';
 
