@@ -27,7 +27,13 @@ class SectionTitle extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {},
-            child: const Text('Lihat Semua'),
+            child: const Text(
+              'Lihat Semua',
+              style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -562,12 +568,29 @@ class _DetailBookScreenState extends State<DetailBookScreen> {
               maxLines: 3,
             ),
             const SizedBox(height: 16.0),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Rating dan Ulasan',
+                  style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Icon(
+                  Icons.chevron_right,
+                  size: 24.0, // Adjust the size of the chevron if needed
+                ),
+              ],
+            ),
             ClipRRect(
               borderRadius: BorderRadius.circular(
                   10.0), // Adjust the corner radius as needed
-              child: Image.asset('assets/ss.png'),
+              child: Image.asset('assets/rating.png'),
             ),
-            const SizedBox(height: 12.0),
+            const SizedBox(height: 4.0),
             Card(
               elevation: 4.0,
               margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -591,8 +614,7 @@ class _DetailBookScreenState extends State<DetailBookScreen> {
                         const Expanded(
                           flex: 2,
                           child: Padding(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -667,7 +689,8 @@ class _DetailBookScreenState extends State<DetailBookScreen> {
                         ),
                         const Text(
                           'Desember 10, 2024',
-                          style: TextStyle(color: Colors.black54),
+                          style: TextStyle(
+                              color: Colors.black54, fontFamily: 'Nunito'),
                         ),
                       ],
                     ),
